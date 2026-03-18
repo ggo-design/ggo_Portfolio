@@ -5,13 +5,13 @@ const projectData = {
     title: "모바일 앱 <주석 JOOSEO> 기획 및 디자인",
     tags: ["Planning", "Branding", "Figma", "Mobile design"],
     edu: "전통주 시장의 정보 불균형 해소를 위해 ‘기록’의 가치를 담은 브랜드 <주석>을 기획하고, 아이덴티티 수립부터 BM 설계, UI/UX 프로토타이핑까지 브랜드 탄생의 전 과정을 시스템화했습니다.",
-    img: "../images/str-modal-1.png",
+    img: "./images/str-modal-1.png",
   },
   str_2: {
     title: "<자라섬 재즈 페스티벌> 띠배너 리디자인",
     tags: ["Branding", "Copywriting", "Design"],
     edu: "속담 속 ‘재주’와 ‘Jazz’의 유사 발음을 이용한 언어유희적 카피로 페스티벌의 유쾌한 정체성을 시각화했습니다. 2025년 키비주얼을 전략적으로 변주하여 브랜드의 결을 유지하면서도 대중의 시선을 끄는 위트 있는 홍보물을 완성했습니다.",
-    img: "../images/str-modal-2.png",
+    img: "./images/str-modal-2.png",
   },
   str_3: {
     title: "기업형 반응형 웹사이트3",
@@ -31,7 +31,7 @@ const projectData = {
     title: "<수원역 로데오 콘테스트> 기획 및 운영",
     tags: ["Planning", "Marketing", 'Field Directing'],
     edu: "전년 대비 지원율을 2배 이상 높이기 위해 공격적인 홍보를 전개했으며, 부상 중에도 현장을 지키는 집념으로 성공적인 대회 운영을 이끌어냈습니다.",
-    img: "../images/act-modal-1.png",
+    img: "./images/act-modal-1.png",
   },
   act_2: {
     title: "공공기관 웹 접근성 사이트",
@@ -51,7 +51,7 @@ const projectData = {
     title: "Delivery App Design",
     tags: ["Figma", "User Flow"],
     edu: "사용자 여정 지도(User Journey Map)를 그려 페인포인트를 해결하는 과정 중심의 UX 디자인입니다.",
-    img: "../images/cre-modal-1.png",
+    img: "./images/cre-modal-1.png",
   },
   cre_2: {
     title: "Travel Guide Prototype",
