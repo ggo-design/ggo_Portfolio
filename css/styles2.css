@@ -1,0 +1,976 @@
+@charset "UTF-8";
+
+
+/* 공통 영역 */
+/* Font */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+@font-face {
+  font-family: 'Mattone', sans-serif;
+  src: url('english-font.woff2') format('woff2');
+  unicode-range: U+0020-007F; /* 영문, 숫자, 특수문자 */
+}
+
+@font-face {
+  font-family: "Noto Sans", sans-serif;
+  src: url('korean-font.woff2') format('woff2');
+  unicode-range: U+AC00-D7AF, U+1100-11FF, U+3130-318F; /* 한글 조합형, 자음/모음 */
+}
+
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #2d2d2d;;
+}
+body {
+  background: #FFFEF9;
+  color: #2d2d2d;
+  overflow: hidden;
+  font-family: 'Mattone', 'Noto Sans', sans-serif;
+}
+a{
+  display: block;
+  text-decoration: none;
+}
+li{list-style: none;}
+
+
+/* 상단 티커바 공통 설정 */
+.ticker-bar{
+  display: block; /* 숨김 해제 */
+  position: fixed; /* 상단 고정 */
+  top: 0;
+  width: 100%;
+  /* height: 30px; */
+  background: #A6C0F7;
+  padding: 10px 0;
+  overflow: hidden;
+  border-bottom: 2px solid #96A3B3;
+  z-index: 101; /* 헤더보다 위에 있거나 같아야 함 */
+  /* 부드럽게 사라지게 함 */
+  transition: transform 0.4s ease-in-out;
+}
+.ticker-track {
+  display: flex; 
+  width: max-content;
+  animation: scrollTicker 40s linear infinite; /* 20초 동안 선형으로 무한 반복 */
+}
+.ticker-content {
+  display: flex;
+  flex-shrink: 0; /* 크기가 줄어들지 않도록 고정 */
+}
+.ticker-track span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2d2d2d;
+  padding: 0 40px;
+  white-space: nowrap;
+}
+/* 무한 루프 핵심 애니메이션 */
+@keyframes scrollTicker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* 뭉치가 2개이므로 전체 길이의 딱 절반만 이동하면 다시 처음과 이어짐 */
+    transform: translateX(-50%);
+  }
+}
+/* 마우스를 올렸을 때 멈추게 하고 싶다면 (선택사항) */
+.ticker-bar:hover .ticker-track {
+  animation-play-state: paused;
+}
+/* 상단 티커바 End */
+
+
+/* 모바일 Area ---------------------------------------------------------------------------- */
+
+/* PC 헤더 & 네비게이션 숨기기 */
+#header-left,
+#header-right
+{display: none;}
+/* End */
+
+/* 헤더 영역 header Area */
+header{
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  z-index: 100;
+  background: #FFFEF9;
+  border-bottom: 1px solid #96A3B3;
+}
+
+.logo {
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+}
+/* 헤더 영역 End */
+
+/* 햄버거 버튼 (완성!!!!!!!!!!!) --------------------------------------- */
+.hamburger{
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 101;
+}
+.hamburger span {
+  width: 25px;
+  height: 2px;
+  background: #2d2d2d;
+  transition: 0.3s;
+}
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+/* 햄버거 버튼 End */
+
+
+/* 모바일 메뉴창(햄버거버튼 눌렀을 때 뜸) */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  transition: 0.5s;
+  background: #E1E881;
+}
+.mobile-nav.active {
+  right: 0;
+}
+.mobile-nav #mobile-gnb {
+  list-style: none;
+  text-align: center;
+}
+.mobile-nav #mobile-gnb > li > a {
+  font-size: 2rem;
+  color: #fff;
+  margin: 40px 0;
+}
+
+
+/* section1 intro Area */
+/* hero img 설정 (완성!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!) */
+/* tab, pc 히어로 img 숨기기 */
+.tab-hero-img,
+.pc-hero-img{display: none}
+
+.intro .hero-container{
+  width: 100%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.intro .hero-container img.mobile-hero-img{
+  width: 100%;
+  max-width: 767px;
+  height: 100%;
+  margin: auto;
+  object-fit: contain;
+} /* hero img End */
+
+
+/* section2~4 Work Area --------------------------------------------------------- */
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative; /* 체커보드, index에 따른 기준 */
+}
+
+.sec2{background: #FDFBF1;}
+.sec3{background: #FFF5F0;}
+.sec4{background: #F4F7FA;}
+
+
+/* 간지 */
+/* 체커보드 */
+div.slide{
+  position: relative;
+}
+div.slide .checker-board{
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+}
+.checker-board-img{
+  height: 240px;
+  object-fit: cover;
+}
+
+/* 모바일 - 둥근 사각형 */
+.divider{
+  width: 80%;
+  height: 400px;
+  margin: 20px auto;
+  border-radius: 50px;
+  border: 3px solid #677083;
+  background: #FFFEF9;
+  text-align: center;
+  padding: 50px;
+  position: relative; /* h2, txt1~ 기준 */
+}
+
+/* 하단 인덱스 공통 */
+.index{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  cursor: default;
+}
+
+/* 간지 텍스트 공통 설정 */
+.divider h2{
+  font-size: 1.4rem;
+  width: 80%;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  word-break: keep-all;
+  cursor: default;
+}
+.divider p{
+  font-family: "Pretandard";
+  color: #444;
+  word-break: keep-all;
+  cursor: default;
+}
+
+.divider .txt1{
+  width: 80%;
+  font-style: italic;
+  font-size: 0.8rem;
+  font-weight: 350;
+  position: absolute;
+  top: 105px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.divider .txt2{
+  width: 75%;
+  font-size: 1rem;
+  font-weight: 400;
+  position: absolute;
+  top: 180px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.divider .txt3{display: none;}
+
+/* 간지 텍스트 개별 설정 */
+.sec2 .divider > h2{
+  color: #7A9074;
+}
+.sec2 .divider span{
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #7A9074;
+  position: absolute;
+  top: 290px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.sec2 .index li{color: #7A9074;}
+
+.sec3 .divider > h2{
+  color: #E5A992;
+}
+.sec3 .divider span{
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #E5A992;
+  position: absolute;
+  top: 290px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.sec3 .index li{color: #E5A992;}
+
+.sec4 .divider > h2{
+  color: #B8C5D6;
+}
+.sec4 .divider span{
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #B8C5D6;
+  position: absolute;
+  top: 290px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.sec4 .index li{color: #B8C5D6;}
+
+  /* 프로젝트 카드 배경 공통 */
+  .sec2 div.sub-slide{
+    background-image: url(../images/sec2-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+  }
+  .sec3 div.sub-slide{
+    background-image: url(../images/sec3-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+  }
+  .sec4 div.sub-slide{
+    background-image: url(../images/sec4-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+  }
+
+
+/* 모달 */
+.modal-overlay{
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #4e4e4b86;
+  opacity: 0;
+  transition: 0.4s;
+}
+.modal-overlay.active {
+  display: block;
+  opacity: 1;
+}
+.modal-content {
+  margin: 5vh auto;
+  width: 90%;
+  max-width: 900px;
+  height: 85vh;
+  background: #FFFEF9;
+  border-radius: 30px;
+  position: relative;
+  overflow-y: auto;
+  padding: 40px;
+  transform: scale(0.9);
+  transition: 0.4s;
+}
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+#modalBody img {
+  width: 100%;
+  border-radius: 15px;
+  margin: 20px 0;
+}
+.tag {
+  background: #705D3A1a;
+  color: #705D3A;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-right: 5px;
+  border: 1px solid #705D3A33;
+}
+.edu-note {
+  background: rgba(255, 77, 79, 0.05);
+  border-left: 4px solid #ff4d4f;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.close-btn {
+  position: absolute;
+  right: 35px;
+  top: 25px;
+  font-size: 45px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s;
+  z-index: 10;
+}
+.close-btn:hover {
+  color: #2d2d2d;
+}
+
+
+/* 모바일 슬라이드 좌우 버튼 (완성!!!!!!!!!!!!!!!!!!!!!!!!!!) */
+/* 1. 기본 화살표 스타일 초기화 및 위치 조정 */
+.fp-controlArrow {
+  top: 60% !important;
+  transform: translateY(-50%);
+  border: none !important; /* 기본 삼각형 모양 제거 */
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2. 위치 조정 */
+.fp-controlArrow.fp-next {right: 20px !important;}
+.fp-controlArrow.fp-prev {left: 20px !important;}
+
+/* 3. 내부 이미지 설정 공통 */
+.fp-controlArrow::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease; /* 호버 애니메이션을 위해 여기에 transition */
+}
+
+/* 4. 이미지 개별 삽입 */
+.fp-controlArrow.fp-next::after {
+  background-image: url('../images/controlArrow-R-mo.png');
+}
+.fp-controlArrow.fp-prev::after {
+  background-image: url('../images/controlArrow-L-mo.png');
+}
+
+/* 5. 호버 효과: 따옴표 제거 및 각도 수정 */
+/* Prev는 왼쪽으로 기울여야 하므로 마이너스(-) 각도 */
+.fp-controlArrow.fp-prev:hover::after,
+.fp-controlArrow.fp-prev:active::after {
+  transform: rotate(-10deg);
+}
+
+/* Next는 오른쪽으로 기울여야 하므로 플러스(+) 각도 */
+.fp-controlArrow.fp-next:hover::after,
+.fp-controlArrow.fp-next:active::after {
+  transform: rotate(10deg);
+}
+/* 슬라이드 좌우버튼 End */
+
+/* 반응형 (Tablet) ------------------------------------------------------------------------ */
+@media all and (min-width: 768px) {
+  /* body{background-color: darkgrey;} */
+
+  /* hero img */
+  /* 태블릿 hero img 설정 */
+  .intro .hero-container{
+    width: 100%;
+    height: 100%;
+    max-height: 1119px;
+    margin: auto;
+  }
+.intro .hero-container img.tab-hero-img{
+  display: block;
+  width: 100%;
+  max-width: 1119px;
+  height: 100%;
+  max-height: 1024px;
+  margin: auto;
+  object-fit: contain;
+}
+
+/* 모바일, PC hero img */
+  .mobile-hero-img,
+  .pc-hero-img{display: none;}
+
+  /* 태블릿 체커보드 */
+  .checker-board{
+    width: 100%;
+    margin: auto;
+  }
+  .checker-board-img{
+    width: 100%;
+  }
+
+  /* 태블릿 타원형 */
+.divider{
+  width: 80%;
+  height: 480px;
+  border-radius: 50%;
+  position: relative; /* h2, txt1~ 기준 */
+}
+
+/* 하단 인덱스 공통 */
+.index{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px;
+  cursor: default;
+}
+
+/* 간지 텍스트 공통 설정 */
+.divider h2{
+  font-size: 1.8rem;
+  width: 70%;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  word-break: keep-all;
+  cursor: default;
+}
+
+.divider .txt1{
+  font-size: 0.9rem;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.divider .txt2{
+  width: 75%;
+  font-size: 1.1rem;
+  font-weight: 400;
+  position: absolute;
+  top: 180px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.divider .txt3{
+  display: block;
+  width: 70%;
+  font-size: 0.9rem;
+  font-weight: 350;
+  position: absolute;
+  top: 330px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+
+/* 간지 텍스트 개별 설정 */
+.sec2 .divider > h2{
+  color: #7A9074;
+}
+.sec2 .divider span{
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #7A9074;
+  position: absolute;
+  top: 315px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.sec2 .index li{color: #7A9074;}
+
+
+.sec3 .divider > h2{
+  color: #E5A992;
+}
+.sec3 .divider span{
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #E5A992;
+  position: absolute;
+  top: 315px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.sec3 .index li{color: #E5A992;}
+
+.sec4 .divider > h2{
+  color: #B8C5D6;
+}
+.sec4 .divider span{
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #B8C5D6;
+  position: absolute;
+  top: 315px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.sec4 .index li{color: #B8C5D6;}
+
+  .hamburger {display: flex;}
+
+  .btn-group {
+    flex-direction: column;
+  }
+  .modal-content {
+    width: 95%;
+    height: 90vh;
+    padding: 20px;
+  }
+
+  /* 슬라이드 좌우 버튼 */
+  .fp-controlArrow.fp-next { right: 50px;}
+  .fp-controlArrow.fp-prev { left: 50px;}
+
+} /* tab End */
+
+/* 반응형 (PC) ------------------------------------------------------------------------------------------ */
+@media all and (min-width: 1200px) {
+  /* body{background-color: teal;} */
+
+  #header-left,
+  #header-right
+  {display: block;}
+
+  /* PC logo */
+  .logo{
+    font-size: 2rem;
+  }
+  /* hero img */
+  /* PC hero img 보이기 */
+  .pc-hero-img{
+    display: block !important;
+    width: 100%;
+    max-width: 1920px;
+    height: 100%;
+    max-height: 1080px;
+    margin: auto;
+    object-fit: contain;
+  }
+
+  /* 모바일, 태블릿 hero img 숨기기 */
+  .mobile-hero-img,
+  .tab-hero-img{display: none !important;}
+
+
+  /* PC 헤더 영역 */
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    z-index: 100;
+    transition: all 0.4s ease;
+  }
+
+  /* 양쪽 메뉴 공통 */
+  header nav ul{
+    display: flex;
+    gap: 100px;
+    font-size: 1.2rem;
+  }
+
+  /* 모바일, 태블릿 메뉴 옵션 숨기기 */
+  .mobile-nav,
+  .hamburger {
+    display: none;
+  }
+
+  /* PC 체커보드 */
+  div.slide{
+    position: relative;
+  }
+  div.slide .checker-board{
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: auto;
+  }
+  .checker-board-img{
+    width: 100%;
+  }
+
+/* PC 타원형 */
+  .divider{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+    height: 50vh;
+    min-height: 400px;
+    margin: 10% auto 0;
+    padding: 50px 10px 30px;
+    position: relative; /* index 배치용으로 유지 */
+    border-radius: 50%;
+    border: 3px solid #677083;
+    background: #FFFEF9;
+  }
+
+  /* 간지 텍스트 공통 설정 */
+  /* .divider h2{
+    font-size: 1.9rem;
+    width: 70%;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    word-break: keep-all;
+    cursor: default;
+  }
+  .divider p{
+    font-family: "Pretandard";
+    color: #444;
+    word-break: keep-all;
+    cursor: default;
+  }
+
+  .divider .txt1{
+    font-style: italic;
+    font-size: 0.9rem;
+    font-weight: 350;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .divider .txt2{
+    width: 75%;
+    font-size: 1.1rem;
+    font-weight: 400;
+    position: absolute;
+    top: 160px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .divider .txt3{
+    display: block;
+    width: 45%;
+    font-size: 0.9rem;
+    font-weight: 350;
+    position: absolute;
+    top: 310px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  } */
+  .divider h2, 
+  .divider .txt1{
+    position: static !important; /* absolute 해제 */
+    width: 80% !important;
+    margin: 10px 0 !important; /* 요소 간 간격 설정 */
+  }
+  .divider .txt2{
+    position: static !important;
+    width: 80% !important;
+    margin: 20px 0;
+  }
+  .divider .txt3{
+    position: static;
+    width: 50%;
+    margin: 5% 0 0;
+  }
+
+  /* 간지 텍스트 개별 설정 */
+  .sec2 .divider > h2{
+    color: #7A9074;
+  }
+  .sec2 .divider span{
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #7A9074;
+    position: absolute;
+    top: 280px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .sec2-intro-index li{color: #7A9074;}
+
+  .sec3 .divider > h2{
+    color: #E5A992;
+  }
+  .sec3 .divider span{
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #E5A992;
+    position: absolute;
+    top: 290px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .sec3-intro-index li{color: #E5A992;}
+
+  .sec4 .divider > h2{
+    color: #B8C5D6;
+  }
+  .sec4 .divider span{
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #B8C5D6;
+    position: absolute;
+    top: 290px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  /* 하단 인덱스 공통 >>>>>>> 모바일, 태블릿 에도 적용해야함!!!!!!!! */
+  .sec2-intro-index li:first-child,
+  .sec3-intro-index li:first-child,
+  .sec4-intro-index li:first-child{
+    position: absolute;
+    bottom: 20px;
+    left: 80px;
+    cursor: default;
+  }
+  .sec2-intro-index li:last-child,
+  .sec3-intro-index li:last-child,
+  .sec4-intro-index li:last-child{
+    position: absolute;
+    bottom: 20px;
+    right: 80px;
+    cursor: default;
+  }
+
+  /* 프로젝트 소개 카드 sub-slide / project-card */
+  .sub-slide .sub-index{
+    color: #2d2d2d;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+    cursor: default;
+  }
+
+  /* project-card 프로젝트 카드 공통 */
+  .project-card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    width: 70vw;
+    height: 50vh;
+    padding: 40px;
+    position: relative; /* h2, p 기준 */
+
+    margin: 5% auto 0;
+    border: 3px solid #677083;
+    border-radius: 20px;
+    background: #FFFEF9;
+    text-align: center;
+  }
+
+  .project-card h2{
+    width: 50vw;
+    font-size: 2.2rem;
+    margin: 10px auto;
+    letter-spacing: -1px;
+  }
+  .project-card .txt1{
+    width: 50vw;
+    font-size: 1.1rem;
+    font-weight: 350;
+    margin: 0 auto;
+  }
+  .project-card .txt2{
+    font-family: "Pretendard";
+    width: 60vw;
+    font-size: 1.3rem;
+    font-weight: 350;
+    margin: 5% auto 0;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    word-break: keep-all;
+  }
+  .project-card #btn-group{
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    flex-flow: row nowrap;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .project-card h2, 
+  .project-card .txt1, 
+  .project-card .txt2, 
+  .project-card .btn-group {
+    position: static !important;
+  }
+
+  .project-card div.btn-group1 button,
+  .project-card .btn-group2 button,
+  .project-card .btn-group3 button{
+    width: 250px;
+    height: 60px;
+    background: #FFFEF9;
+    border: 3px solid #677083;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .project-card .btn-group1 button:hover{background: #7A9074ab;}
+  .project-card .btn-group2 button:hover{background: #E5A992ab;}
+  .project-card .btn-group3 button:hover{background: #B8C5D6ab;}
+
+
+  /* PC 상단 메뉴 */
+  nav ul li a {
+    color: #2d2d2d;
+    transition: 0.3s;
+  }
+  nav ul li.active a,
+  nav ul li a:hover {
+    color: #F4764A;
+    text-shadow: 0 0 10px #F4764A;
+  }
+
+  
+    /* 슬라이드 좌우 버튼 */
+  .fp-controlArrow.fp-next {right: 50px !important;}
+  .fp-controlArrow.fp-prev {left: 50px !important;}
+  .fp-controlArrow::after {
+    width: 50px;
+    height: 50px;
+  }
+
+} /* PC End */
+
