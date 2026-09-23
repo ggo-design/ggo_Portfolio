@@ -45,6 +45,12 @@ const projectData = {
     edu: "PC 환경에서 시선을 사로잡는 비주얼 인터렉션 구현 중심의 포트폴리오입니다.",
     img: "https://via.placeholder.com/800x600/ffc107/ffffff?text=PC+Web+Project+03",
   },
+  act_4: {
+    title: "One-Page Interaction Site",
+    tags: ["jQuery", "ScrollMagic"],
+    edu: "PC 환경에서 시선을 사로잡는 비주얼 인터렉션 구현 중심의 포트폴리오입니다.",
+    img: "https://via.placeholder.com/800x600/ffc107/ffffff?text=PC+Web+Project+03",
+  },
 
   // 작업물 creative
   cre_1: {
@@ -65,14 +71,7 @@ const projectData = {
     edu: "협업 효율을 극대화하는 컴포넌트 구조화 및 디자인 시스템 교육을 위해 설계되었습니다.",
     img: "https://via.placeholder.com/800x600/0dcaf0/ffffff?text=Figma+Design+03",
   },
-  cre_4: {
-    title: "Design System Library",
-    tags: ["Variant", "Auto Layout"],
-    edu: "협업 효율을 극대화하는 컴포넌트 구조화 및 디자인 시스템 교육을 위해 설계되었습니다.",
-    img: "https://via.placeholder.com/800x600/0dcaf0/ffffff?text=Figma+Design+03",
-  },
 
-  // 
   abo_1: {
     title: "Visual Graphic Gallery",
     tags: ["Banner", "Book Cover"],
@@ -102,7 +101,7 @@ const projectData = {
 
 // 2. fullPage.js 초기화
 new fullpage("#fullpage", {
-  anchors: ["intro", "res-web", "pc-web", "figma", "graphics"],
+  anchors: ["intro", "strategy", "action", "creative", "about"],
   menu: "#menu",
   navigation: true,
   responsiveWidth: 768,
@@ -142,7 +141,7 @@ document.querySelectorAll(".open-modal").forEach((btn) => {
                   .map((t) => `<span class="tag">#${t}</span>`)
                   .join("")}</div>
                 <h2 style="margin:15px 0; font-size:2rem;">${d.title}</h2>
-                <div class="edu-note"><strong>💡 Instructor's Point:</strong> ${
+                <div class="edu-note"><strong>🌲Evergreen Note -</strong> ${
                   d.edu
                 }</div>
                 <img src="${d.img}" alt="work">
